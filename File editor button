@@ -1,0 +1,66 @@
+///Klik
+_view.setOnTouchListener(new OnTouchListener() {
+				@Override public boolean onTouch(View v, MotionEvent event) {
+						switch(event.getAction()) {
+								case
+								MotionEvent.ACTION_DOWN:
+								{
+						_Anim(_view, "elevation", 5, 70);
+						_Anim(_view, "scaleX", 0.9d, 70);
+						_Anim(_view, "scaleY", 0.9d, 70);
+						t = new TimerTask() {
+							@Override
+							public void run() {
+								runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										_Anim(_view, "elevation", 1, 100);
+										_Anim(_view, "scaleX", 0.88d, 100);
+										_Anim(_view, "scaleY", 0.88d, 100);
+									}
+								});
+							}
+						};
+						_timer.schedule(t, (int)(70));
+						break; }
+					case
+					MotionEvent.ACTION_UP:
+								{
+						t.cancel();
+						_Anim(_view, "elevation", 40, 100);
+						_Anim(_view, "scaleX", 1.1d, 100);
+						_Anim(_view, "scaleY", 1.1d, 100);
+						t = new TimerTask() {
+							@Override
+							public void run() {
+								runOnUiThread(new Runnable() {
+									@Override
+									public void run() {
+										_Anim(_view, "elevation", 25, 100);
+										_Anim(_view, "scaleX", 1.0d, 100);
+										_Anim(_view, "svaleY", 1.0d, 100);
+									}
+								});
+							}
+						};
+						_timer.schedule(t, (int)(100));
+						break;
+					}}
+				return false ; }
+		});
+		
+///Anim
+ObjectAnimator oa = new ObjectAnimator();
+						oa.setTarget(_view);
+						oa.setPropertyName(_Properti);
+						oa.setFloatValues((float)_nilai);
+						oa.setDuration((long)_durasi);
+						oa.start();
+		oa.setInterpolator(new LinearInterpolator());
+		oa.start();
+		
+///Radius & Color
+android.graphics.drawable.GradientDrawable gd = new android.graphics.drawable.GradientDrawable();
+		gd.setColor(Color.parseColor(_Warna));
+		gd.setCornerRadius((int)_Radius);
+		_view.setBackground(gd);
